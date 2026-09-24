@@ -1,0 +1,240 @@
+# Customer Risk & Segmentation Engine
+
+## Overview
+
+The **Customer Risk & Segmentation Engine** is a Python-based project that evaluates customer information using predefined business rules.
+
+The application processes customer records and assigns three main classifications:
+
+* Customer Segment
+* Risk Level
+* Eligibility Status
+
+It also generates a portfolio-level summary showing how customers are distributed across the different categories.
+
+This first version is intentionally built using fundamental Python concepts before introducing data-processing libraries or machine learning.
+
+## Business Problem
+
+Organizations often need to classify customers based on multiple attributes such as account balance, risk score, debt, and account status.
+
+Instead of manually reviewing every customer, a rule-based system can automatically apply consistent decision criteria.
+
+This project simulates that process by transforming raw customer information into actionable classifications.
+
+## Customer Data
+
+Each customer contains the following attributes:
+
+| Field     | Description                                              |
+| --------- | -------------------------------------------------------- |
+| `name`    | Customer name                                            |
+| `score`   | Customer score used for segmentation and risk evaluation |
+| `balance` | Customer account balance                                 |
+| `debt`    | Current customer debt                                    |
+| `active`  | Indicates whether the customer is active                 |
+
+During processing, the application adds:
+
+| Field         | Description                 |
+| ------------- | --------------------------- |
+| `segment`     | Customer segment            |
+| `risk`        | Calculated risk level       |
+| `eligibility` | Customer eligibility status |
+
+## Business Rules
+
+### Customer Segmentation
+
+Customers are classified into four segments:
+
+**Inactive**
+
+* Customer is not active.
+
+**Premium**
+
+* Score >= 80
+* Balance >= 20,000
+
+**Preferred**
+
+* Score >= 60
+* Balance >= 10,000
+
+**Standard**
+
+* Customers who do not meet the previous conditions.
+
+### Risk Classification
+
+Risk is calculated using customer score and debt.
+
+**Low Risk**
+
+* Score >= 80
+* Debt < 10,000
+
+**Medium Risk**
+
+* Score >= 60
+* Debt < 15,000
+
+**High Risk**
+
+* Customers who do not meet the previous conditions.
+
+### Eligibility Evaluation
+
+Customers are evaluated using score, debt, and account status.
+
+**Not Eligible**
+
+* Customer is inactive.
+
+**Eligible**
+
+* Score >= 75
+* Debt < 10,000
+
+**Review**
+
+* Score >= 60
+* Debt < 15,000
+
+Customers who do not meet these requirements are classified as **Not Eligible**.
+
+## How It Works
+
+The application follows a simple processing pipeline:
+
+```text
+Customer Data
+     ↓
+Business Rules
+     ↓
+Customer Processing
+     ↓
+Portfolio Summary
+     ↓
+Report
+```
+
+Each customer is processed using three Python functions:
+
+```python
+calculate_segment()
+calculate_risk()
+evaluate_eligibility()
+```
+
+The results are added to each customer record before generating the portfolio summary.
+
+## Example Output
+
+```text
+=== CUSTOMER RISK & SEGMENTATION REPORT ===
+
+Total Customers: 5
+
+SEGMENTS
+Premium: 1
+Preferred: 2
+Standard: 1
+Inactive: 1
+
+ELIGIBILITY
+Eligible: 2
+Review: 1
+Not Eligible: 2
+```
+
+## Concepts Practiced
+
+This project reinforces fundamental Python concepts including:
+
+* Variables
+* Lists
+* Dictionaries
+* Conditional statements
+* Boolean logic
+* `for` loops
+* Counters
+* Functions
+* Function parameters
+* Return values
+* Data processing
+* Business-rule implementation
+
+## Technologies
+
+* Python 3
+
+No external libraries are required for the first version.
+
+## Project Structure
+
+```text
+customer_risk_segmentation/
+│
+├── README.md
+└── customer_analysis.py
+```
+
+## How to Run
+
+Clone the repository and navigate to the project directory.
+
+Run:
+
+```bash
+python customer_analysis.py
+```
+
+The application will process the customer dataset and display the portfolio summary in the terminal.
+
+## Future Improvements
+
+This project is designed to evolve alongside the AI Engineering learning path.
+
+### V2 — Pandas & External Data
+
+* Move customer data to a CSV file
+* Load datasets using Pandas
+* Process larger datasets
+* Generate dynamic summaries
+
+### V3 — Data Validation & Error Handling
+
+* Validate required fields
+* Handle missing values
+* Detect invalid data types
+* Add exception handling
+
+### V4 — Exploratory Data Analysis
+
+* Analyze customer distributions
+* Explore relationships between score, balance, and debt
+* Identify risk patterns
+* Add visualizations
+
+### V5 — Machine Learning
+
+* Create training datasets
+* Define features and target variables
+* Train classification models
+* Evaluate model performance
+* Compare model predictions with the original rule-based approach
+
+### V6 — API Deployment
+
+* Create a prediction API
+* Send customer information through API requests
+* Return segmentation or risk predictions
+* Prepare the project for integration with other applications
+
+## Project Goal
+
+The goal is not only to create a customer classification script, but to progressively transform a simple rule-based Python program into a more complete **Machine Learning Engineering project**.
+
+Each new version will introduce concepts learned throughout the AI Engineering roadmap while preserving the previous versions as evidence of the project's evolution.
